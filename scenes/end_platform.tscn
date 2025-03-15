@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b41jhqkorhadi"]
+
+[ext_resource type="Texture2D" uid="uid://bbqjmikt1f6o6" path="res://assets/start_end_platform/start_end_platform.png" id="1_stph7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fn61i"]
+size = Vector2(32, 11)
+
+[node name="EndPlatform" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 5)
+texture = ExtResource("1_stph7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_fn61i")
