@@ -61,7 +61,7 @@ public partial class Game : Node2D
 			{
 				if (!platform.IsReal)
 				{
-					FadeOutAndRemove(platform); // Удаляем платформу из сцены
+					platform.FadeOutAndRemove(); // Удаляем платформу из сцены
 				}
 			}
 
@@ -99,22 +99,5 @@ public partial class Game : Node2D
 			}
 		}
 		return false;
-	}
-	
-	private async void FadeOutAndRemove(Platform platform)
-	{
-		var sprite = platform.GetNode<Sprite2D>("Sprite2D");
-		double fadeDuration = 0.5;
-		double elapsed = 0;
-
-		while (elapsed < fadeDuration)
-		{
-			elapsed += GetProcessDeltaTime();
-			double alpha = 1 - (elapsed / fadeDuration);
-			sprite.Modulate = new Color(1, 1, 1, (float)alpha);
-			await ToSignal(GetTree(), "process_frame");
-		}
-
-		platform.QueueFree();
 	}
 }

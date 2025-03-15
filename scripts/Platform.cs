@@ -6,23 +6,15 @@ public partial class Platform : Area2D
 	
 	[Signal] public delegate void PlatformClickedEventHandler(bool isReal, Vector2 position);
 	
-	private Sprite2D _sprite; // Ссылка на Sprite2D
-	private Texture2D _normalTexture; // Обычная текстура
-	private Texture2D _hoverTexture; // Текстура при наведении
+	private AnimatedSprite2D _sprite; // Ссылка на Sprite2D
 
 	public override void _Ready()
 	{
-		_sprite = GetNode<Sprite2D>("Sprite2D");
-
-		// Загружаем текстуры из файлов
-		_normalTexture = GD.Load<Texture2D>("res://assets/platform/platform_test.png");
-		_hoverTexture = GD.Load<Texture2D>("res://assets/platform/platform_test_hover.png");
-
-		if (_normalTexture != null)
-		{
-			_sprite.Texture = _normalTexture;
-		}
-
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		
+		//_sprite.Play("default"); // Запускаем анимацию по умолчанию
+		_sprite.Frame = 0; // Устанавливаем первый кадр
+		
 		MouseEntered += OnMouseEntered;
 		MouseExited += OnMouseExited;
 		
@@ -31,25 +23,38 @@ public partial class Platform : Area2D
 
 	private void OnMouseEntered()
 	{
-		if (_hoverTexture != null)
-		{
-			_sprite.Texture = _hoverTexture;
-		}
+		GD.Print("Enter");
 	}
 
 	private void OnMouseExited()
 	{
-		if (_normalTexture != null)
-		{
-			_sprite.Texture = _normalTexture;
-		}
+		GD.Print("Exited");
 	}
 	
 	private void OnInputEvent(Node viewport, InputEvent @event, long shapeIdx)
 	{
+		if (!IsInstanceValid(this) || !Monitorable) // Проверяем, активна ли платформа
+		{
+			return;
+		}
+		
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
 		{
 			EmitSignal(nameof(PlatformClicked), IsReal, GlobalPosition);
 		}
+	}
+	public async void FadeOutAndRemove()
+	{
+		_sprite.Stop();
+		_sprite.Frame = 0;
+		
+		await ToSignal(GetTree().CreateTimer(0.5), "timeout");
+		
+		_sprite.Play("default");
+		
+		await ToSignal(_sprite, AnimatedSprite2D.SignalName.AnimationFinished); 
+		
+		Monitorable = false;
+		InputEvent -= OnInputEvent;
 	}
 }

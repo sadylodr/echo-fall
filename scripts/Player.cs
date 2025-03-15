@@ -3,13 +3,16 @@ using Godot;
 public partial class Player : Node2D
 {
 	[Export] public float Speed = 200.0f; // Скорость перемещения игрока
-
-	private Vector2 _targetPosition; // Целевая позиция для перемещения
+	
+	private AnimatedSprite2D _sprite;
+	private Vector2 _targetPosition = Vector2.Zero; // Целевая позиция для перемещения
 	private bool _isMoving = false; // Флаг, указывающий, движется ли игрок
 
 	public override void _Ready()
 	{
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_targetPosition = GlobalPosition;
+		_sprite.Stop();
 	}
 
 	public override void _Process(double delta)
@@ -25,6 +28,7 @@ public partial class Player : Node2D
 	{
 		_targetPosition = position;
 		_isMoving = true;
+		_sprite.Play("default");
 	}
 
 	// Метод для постепенного перемещения игрока
@@ -42,6 +46,7 @@ public partial class Player : Node2D
 			// Устанавливаем точную позицию, чтобы избежать дрожания
 			GlobalPosition = _targetPosition;
 			_isMoving = false;
+			_sprite.Stop();
 		}
 	}
 }
