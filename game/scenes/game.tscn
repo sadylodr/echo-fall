@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://v7jwd40ia2oq"]
+
+[ext_resource type="PackedScene" uid="uid://dcebqwb6gm2ci" path="res://scenes/platform_scene.tscn" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://bmxpnu14oqncw" path="res://scripts/PlatformScene.cs" id="2_lnu2h"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(200, 115)
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("1_yqjtg")]
+position = Vector2(207, 344)
+script = ExtResource("2_lnu2h")
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("1_yqjtg")]
+position = Vector2(424, 342)
