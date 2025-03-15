@@ -1,3 +1,41 @@
-[gd_scene format=3 uid="uid://v7jwd40ia2oq"]
+[gd_scene load_steps=4 format=3 uid="uid://v7jwd40ia2oq"]
+
+[ext_resource type="PackedScene" uid="uid://b4c5rbl2uwd68" path="res://scenes/player.tscn" id="1_lbhrr"]
+[ext_resource type="Script" uid="uid://cf6jb3ua4u5af" path="res://scripts/Game.cs" id="1_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://daqclupafqbas" path="res://scenes/platform.tscn" id="1_uwrxv"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_lnu2h")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Platform1" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(195, 371)
+IsReal = false
+
+[node name="Platform2" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(436, 374)
+
+[node name="Platform3" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(196, 262)
+IsReal = false
+
+[node name="Platform4" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(436, 264)
+
+[node name="Platform5" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(197, 155)
+IsReal = false
+
+[node name="Platform6" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(435, 157)
+
+[node name="Platform7" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(435, 55)
+
+[node name="Platform8" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(197, 53)
+IsReal = false
+
+[node name="Player" parent="." instance=ExtResource("1_lbhrr")]
+position = Vector2(317, 444)
