@@ -10,17 +10,19 @@ config_version=5
 
 [application]
 
-config/name="EchoFall"
-config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/name="Main Menu"
+run/main_scene="uid://cfhln2ros0kdn"
+config/features=PackedStringArray("4.4", "Forward Plus")
 
 [display]
 
-window/canvas_textures/default_texture_filter=1
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="EchoFall"
+project/assembly_name="Main Menu"
 
 [rendering]
 

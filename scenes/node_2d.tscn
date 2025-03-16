@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://crd8epmc03ncj"]
+
+[ext_resource type="Script" uid="uid://b6eblvjcv8103" path="res://scripts/gd/node_2d.gd" id="1_rnjyy"]
+[ext_resource type="Texture2D" uid="uid://ckfkx5po2gv1m" path="res://assets/textures/Guid.png" id="2_4vge2"]
+[ext_resource type="FontFile" uid="uid://ddsbc2ymegdxp" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_04qyp"]
+
+[sub_resource type="GDScript" id="GDScript_roffn"]
+script/source = "extends Sprite2D
+
+# Путь к файлу (относительно папки \"res://\")
+var file_path = \"res://text//answer.txt\"
+
+func _ready():
+	# Вызываем функцию для чтения текста из файла
+	var text = load_text_from_file(file_path)
+	if text != null:
+		print(\"Текст из файла: \", text)
+	else:
+		print(\"Не удалось загрузить текст из файла.\")
+
+# Функция для чтения текста из файла
+func load_text_from_file(path: String) -> String:
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file:
+		var text = file.get_as_text()  # Читаем весь текст из файла
+		file.close()
+		return text
+	else:
+		push_error(\"Файл не найден или не может быть открыт: \" + path)
+		return \"\"
+"
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_rnjyy")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 10.0
+offset_top = 436.0
+offset_right = 67.0
+offset_bottom = 470.0
+text = "->"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(305, 221)
+scale = Vector2(13.875, 7.8125)
+texture = ExtResource("2_4vge2")
+script = SubResource("GDScript_roffn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 62.0
+offset_top = 88.0
+offset_right = 71.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("3_04qyp")
+horizontal_alignment = 1
+vertical_alignment = 2

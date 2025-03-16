@@ -1,3 +1,51 @@
-[gd_scene format=3 uid="uid://v7jwd40ia2oq"]
+[gd_scene load_steps=5 format=3 uid="uid://v7jwd40ia2oq"]
+
+[ext_resource type="PackedScene" uid="uid://b4c5rbl2uwd68" path="res://scenes/player.tscn" id="1_lbhrr"]
+[ext_resource type="Script" path="res://scripts/sharp/Game.cs" id="1_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://daqclupafqbas" path="res://scenes/platform.tscn" id="1_uwrxv"]
+[ext_resource type="Texture2D" uid="uid://6of6s66l4d2x" path="res://assets/background/background.png" id="4_lbhrr"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_lnu2h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(321, 241)
+texture = ExtResource("4_lbhrr")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Platform1" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(263, 332)
+script = null
+
+[node name="Platform2" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(387, 332)
+script = null
+
+[node name="Platform3" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(263, 277)
+script = null
+
+[node name="Platform4" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(387, 277)
+script = null
+
+[node name="Platform5" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(263, 224)
+script = null
+
+[node name="Platform6" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(387, 224)
+script = null
+
+[node name="Platform7" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(387, 169)
+script = null
+
+[node name="Platform8" parent="Node" instance=ExtResource("1_uwrxv")]
+position = Vector2(263, 169)
+script = null
+
+[node name="Player" parent="." instance=ExtResource("1_lbhrr")]
+position = Vector2(324, 454)
+script = null
